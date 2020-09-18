@@ -107,7 +107,7 @@ def sentiment_nlu(text_nlu, car):
             "recommendation": car_recommend
         } 
 
-        recomendation["entities"] = entities_negatives_result
+        recomendation["entities"] = response["entities"]
         return recomendation
 
     else:
