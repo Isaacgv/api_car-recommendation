@@ -29,7 +29,7 @@ def index():
         return recommend
         
     
-    elif 'text' in request.files
+    elif 'text' in request.files:
         recommend = sentiment_nlu(request.files['text'], car)
         print(body['text'])  
         return recommend 
