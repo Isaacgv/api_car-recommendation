@@ -30,6 +30,15 @@ def sentiment_nlu(text_nlu, car):
     sentiment_text_score = response["sentiment"]["document"]["score"]
 
     if sentiment_text_label == 'positive' and sentiment_text_score > 0.5:
+        entities_result = []
+        for entitie_result in response["entities"]:
+            dict_results_all = dict()
+            dict_results_all["entity"] = entitie_type
+            dict_results_all["sentiment"] = entitie_score
+            dict_results_all["mention"] = entitie_text
+            entities_result.append(dict_results_all)
+
+        recomendation_positive["entities"] = entities_result
         return recomendation_positive
 
     #neutral, positive
@@ -117,6 +126,8 @@ def sentiment_nlu(text_nlu, car):
         return recomendation
 
     else:
+
+        recomendation_positive["entities"] = entities_negatives_result
         return recomendation_positive
 
 
