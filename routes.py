@@ -18,11 +18,13 @@ cors = CORS(app, resource={r"/*":{"origins": "*"}})
 def index():
 
     body = request.form
+
     car = body['car'].lower().split()
     print(body)
+    print(request.files['audio'])
 
-    if  'audio' in body:
-        text_audio = recive_audio(body["audio"])
+    if  'audio' in request.files:
+        text_audio = recive_audio(request.files['audio'])
         recommend = sentiment_nlu(text_audio, car)
         print(text_audio)
         return recommend
@@ -35,7 +37,7 @@ def index():
 
 
 def main():
-    port = int(os.environ.get("PORT", 5000)) 
+    port = int(os.environ.get("PORT", 5001)) 
     app.run(host="0.0.0.0", port=port)
 
 if __name__ == "__main__":

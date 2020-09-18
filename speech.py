@@ -1,4 +1,7 @@
-import json
+import json, os
+from io import BytesIO
+from base64 import b64decode
+from cgi import parse_multipart, parse_header
 from os.path import join, dirname
 from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
@@ -25,8 +28,19 @@ stt.set_service_url(
 
 def recive_audio(audio_file_):
 
-    with open(join(dirname(__file__), audio_file_),
-              'rb') as audio_file:
+
+    # Build flac file from stream of bytes
+    fo = open("audio_sample.flac", 'wb')
+    fo.write(audio_file_.read())
+    fo.close()
+
+
+    with open(
+        os.path.join(
+            os.path.dirname(__file__), './.',
+            'audio_sample.flac'
+        ), 'rb'
+    ) as audio_file:
         #audio_source = AudioSource(audio_file)
         stt_result = stt.recognize(
             audio=audio_file,
