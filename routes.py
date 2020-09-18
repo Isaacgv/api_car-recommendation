@@ -17,7 +17,6 @@ cors = CORS(app, resource={r"/*":{"origins": "*"}})
 @app.route("/mutipart/form-data", methods=["POST"])
 def index():
 
-    body = request.form
 
     car = body['car'].lower().split()
     print(body)
@@ -30,14 +29,14 @@ def index():
         return recommend
         
     
-    elif 'text' in body:
-        recommend = sentiment_nlu(body['text'], car)
+    elif 'text' in request.files
+        recommend = sentiment_nlu(request.files['text'], car)
         print(body['text'])  
         return recommend 
 
 
 def main():
-    port = int(os.environ.get("PORT", 5001)) 
+    port = int(os.environ.get("PORT", 5000)) 
     app.run(host="0.0.0.0", port=port)
 
 if __name__ == "__main__":
