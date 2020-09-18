@@ -17,12 +17,10 @@ cors = CORS(app, resource={r"/*":{"origins": "*"}})
 @app.route("/mutipart/form-data", methods=["POST"])
 def index():
 
-    body = request.form.to_dict(flat=False)
-    print(body)
-    car = body['car'].lower().split()
-    
-    print(request.files['audio'])
 
+    car = (request.form['car']).lower().split()
+
+    
     if  'audio' in request.files:
         text_audio = recive_audio(request.files['audio'])
         recommend = sentiment_nlu(text_audio, car)
@@ -30,11 +28,12 @@ def index():
         return recommend
         
     
-    elif 'text' in body:
-        recommend = sentiment_nlu(body['text'], car)
-        print(body['text'])  
+    else:
+        print(request.form['text'])  
+        recommend = sentiment_nlu(request.form['text'], car)
+        print(request.form['text'])  
         return recommend 
-
+  
 
 def main():
     port = int(os.environ.get("PORT", 5000)) 
