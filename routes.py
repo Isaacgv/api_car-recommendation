@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request
-from lask_cors import CORS
+from flask_cors import CORS
 from speech import recive_audio
 from nlu import sentiment_nlu
 app=Flask(__name__)
