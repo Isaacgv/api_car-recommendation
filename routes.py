@@ -17,7 +17,7 @@ cors = CORS(app, resource={r"/*":{"origins": "*"}})
 @app.route("/mutipart/form-data", methods=["POST"])
 def index():
 
-    body = request.form
+    body = request.form.to_dict(flat=False)
     print(body)
     car = body['car'].lower().split()
     
