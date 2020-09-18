@@ -43,6 +43,12 @@ def sentiment_nlu(text_nlu, car):
             entitie_score = entitie_result["sentiment"]["score"]
             entitie_label = entitie_result["sentiment"]["label"]
             entitie_text = entitie_result["text"]
+
+            dict_results_all = dict()
+            dict_results_all["entity"] = entitie_type
+            dict_results_all["sentiment"] = entitie_score
+            dict_results_all["mention"] = entitie_text
+            entities_negatives_result.append(dict_results_all)
         
             if entitie_label == 'negative' or entitie_score < 0 :
 
@@ -52,7 +58,7 @@ def sentiment_nlu(text_nlu, car):
                 dict_results_negative["sentiment"] = entitie_score
                 dict_results_negative["mention"] = entitie_text
                 
-                entities_negatives_result.append(dict_results_negative)
+                
 
                 if (entitie_score < entitie_score_negative) :
                     if  abs(entitie_score - entitie_score_negative) < 0.1:
@@ -107,7 +113,7 @@ def sentiment_nlu(text_nlu, car):
             "recommendation": car_recommend
         } 
 
-        recomendation["entities"] = response["entities"]
+        recomendation["entities"] = entities_negatives_result
         return recomendation
 
     else:
