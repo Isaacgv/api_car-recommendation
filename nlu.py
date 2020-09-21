@@ -32,6 +32,12 @@ def sentiment_nlu(text_nlu, car):
     if sentiment_text_label == 'positive' and sentiment_text_score > 0.5:
         entities_result = []
         for entitie_result in response["entities"]:
+            entitie_type = entitie_result["type"]
+            entitie_score = entitie_result["sentiment"]["score"]
+            entitie_label = entitie_result["sentiment"]["label"]
+            entitie_text = entitie_result["text"]
+
+
             dict_results_all = dict()
             dict_results_all["entity"] = entitie_type
             dict_results_all["sentiment"] = entitie_score
