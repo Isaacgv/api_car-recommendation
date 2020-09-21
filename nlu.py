@@ -113,12 +113,12 @@ def sentiment_nlu(text_nlu, car):
                 car_recommend = "FIAT 500"
             else:
                 car_recommend = "LINEA"
-        elif "LINEA" in car:
+        elif "linea" in car:
             if entitie_type_negative == "DESIGN":
                 car_recommend = "ARGO"
             else:
                 car_recommend = "MAREA"
-        elif "ARGO" in car:
+        elif "argo" in car:
             if entitie_type_negative == "ACESSORIOS" or entitie_type_negative == "CONSUMO" or entitie_type_negative == "DESEMPENHO" :
                 car_recommend = "MAREA"
             else:
